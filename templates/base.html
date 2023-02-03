@@ -55,7 +55,7 @@
 <body>
     {% if messages %}
     <ul class="messages customMessage">
-        {% for message in messages %}
+        {% for message in messages %}\
         <li{% if message.tags %} class="{{ message.tags }}" {% endif %} style="padding-top: 10px;">
             <div class="m-0 alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
                 <strong>{{ message }}</strong>
@@ -84,6 +84,16 @@
                 $('.mainImage img').attr('src', $(this).attr("href"));
             })
         })
+        $('#btn').click(function () {
+
+            $('#alert').removeClass('d-none');
+
+            setTimeout(() => {
+                $('.alert').alert('close');
+            }, 2000);
+
+        })
+
     </script>
 </body>
 

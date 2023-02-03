@@ -7,6 +7,7 @@ from store.models import Product
 import datetime
 import json
 from django.contrib.auth.decorators import login_required
+from accounts.models import UserProfile
 
 # Order Email
 from django.template.loader import render_to_string
@@ -114,6 +115,17 @@ def place_order(request, total=0, quantity=0, delivery_charge=0, cart_items=None
             data.tax = tax
             data.ip = request.META.get("REMOTE_ADDR")
             data.save()
+
+            try:
+                user_profile = UserProfile.objects.get(user=request.user)
+            except UserProfile.DoesNotExist:
+                user_profile = UserProfile.objects.create(user=request.user)
+            user_profile.country = data.country
+            user_profile.profile_picture = "/testimage.jpg"
+            user_profile.city = data.city
+            user_profile.state = data.state
+            user_profile.address_line = data.address_line
+            user_profile.save()
 
             # Order number generator
             yr = int(datetime.date.today().strftime("%Y"))

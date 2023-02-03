@@ -27,6 +27,10 @@
                     <div class="col form-group">
                         <label>Email </label><br>
                         {{form.email}}
+                        <p style="font-size: 10px;margin-top: 5px;color: #db8f01;">*Please provide a valid
+                            email address
+                            to get the
+                            activation link</p>
                     </div> <!-- form-group end.// -->
                     <div class="col form-group">
                         <label>Phone Number </label>
@@ -50,9 +54,9 @@
                 {{form.non_field_errors}}
 
             </form>
+            <p class="text-center mt-4">Have an account? <a href="{% url 'login' %}">Log In</a></p>
         </article><!-- card-body.// -->
     </div> <!-- card .// -->
-    <p class="text-center mt-4">Have an account? <a href="{% url 'login' %}">Log In</a></p>
     <br><br>
     <!-- ============================ COMPONENT REGISTER  END.// ================================= -->
 

@@ -41,6 +41,7 @@ def register(request):
                 password=password,
                 username=username,
                 email=email,
+                phone_number=phone_number,
             )
             user.phone_number = phone_number
             user.save()
@@ -146,6 +147,13 @@ def activate(request, uidb64, token):
     if user is not None and default_token_generator.check_token(user, token):
         user.is_active = True
         user.save()
+        try:
+            user_profile = UserProfile.objects.get(user=user)
+        except UserProfile.DoesNotExist:
+            user_profile = UserProfile.objects.create(user=user)
+            user_profile.profile_picture = "/img_avatar.png"
+            user_profile.country = "India"
+            user_profile.save()
         messages.success(request, "Your account has been activated")
         return redirect("login")
     else:

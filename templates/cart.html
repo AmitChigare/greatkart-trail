@@ -7,7 +7,7 @@
 
         <!-- ============================ COMPONENT 1 ================================= -->
         {% if not cart_items%}
-        <div class="container my-lg-5">
+        <div class="container my-lg-5 cart-empty-c">
             <h5 class="text-center">Your Cart is empty</h5>
             <div class="text-center">
                 <a href="{% url 'store' %}" class="btn btn-primary text-center">Continue Shopping</a>
@@ -75,12 +75,13 @@
                                     </div> <!-- col.// -->
                                 </td>
                                 <td>
-                                    <div class="price-wrap">
+                                    <div class="price-wrap ">
                                         <var class="price">₹ {{cart_item.sub_total}}</var>
-                                        <small class="text-muted">₹ {{cart_item.product.price}} each </small>
+                                        <small class="text-muted ">₹ {{cart_item.product.price}} each
+                                        </small>
                                     </div> <!-- price-wrap .// -->
                                 </td>
-                                <td class="text-right">
+                                <td class="text-right disabled-c">
                                     <a href="{% url 'remove_cart_items' cart_item.product.id cart_item.id %}"
                                         onclick="return confirm('Are you sure you want to delete this item?')"
                                         class="btn btn-danger btn-sm">
