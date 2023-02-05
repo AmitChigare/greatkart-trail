@@ -72,6 +72,8 @@ def register(request):
 
 
 def login(request):
+    # url = request.META.get("HTTP_REFERER")
+    url = request.GET.get("next", "/")
     if request.method == "POST":
         email = request.POST["email"]
         password = request.POST["password"]
@@ -109,7 +111,6 @@ def login(request):
                             for item in cart_item:
                                 item.user = user
                                 item.save()
-
             except:
                 pass
             auth.login(request, user)
@@ -123,7 +124,11 @@ def login(request):
             #         return redirect(params["next"])
             # except:
             #     return redirect("home")
-            return redirect("home")
+            print(url)
+            if url:
+                return redirect(url)
+            else:
+                return redirect("home")
         else:
             messages.warning(request, "Invalid email or password")
             return redirect("login")

@@ -2,7 +2,7 @@
 {% load static %}
 {% block title %}Order Successful{% endblock title %}
 {% block content %}
-<div class="container"
+<div class="container order-details-c"
     style="margin: 0 auto;width: 50%;padding: 50px;background: #f1f1f1;margin-top: 50px;margin-bottom: 50px;">
     <span class="pb-5"><a href="{{ request.META.HTTP_REFERER }}">
             << Go back</a></span>
@@ -48,13 +48,13 @@
                             </div>
 
                             <div class="invoice-items">
-                                <div class="table-responsive" style="overflow: hidden; outline: none;" tabindex="0">
+                                <div class="table-responsive" style="overflow-x: auto; outline: none;" tabindex="0">
                                     <table class="table table-bordered">
                                         <thead>
                                             <tr>
-                                                <th class="per70 text-center">Product</th>
+                                                <th style="min-width: 200px;" class="per70 text-center">Product</th>
                                                 <th class="per5 text-center">Qty</th>
-                                                <th class="per25 text-center">Total</th>
+                                                <th style="min-width: 150px;" class="per25 text-center">Total</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -64,8 +64,7 @@
                                                     <p class="text-muted small">
                                                         {% if item.variations.all %}
                                                         {% for i in item.variations.all %}
-                                                        {{ i.variation_category | capfirst }} : {{
-                                                        i.variation_value }}
+                                                        {{ i.variation_category | capfirst }} : {{i.variation_value }}
                                                         <br>
                                                         {% endfor %}
                                                         {% endif %}

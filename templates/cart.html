@@ -14,15 +14,15 @@
             </div>
         </div>
         {% else %}
-        <div class="row">
+        <div class="row cart-c">
             <aside class="col-lg-9">
                 <div class="card">
                     <table class="table table-borderless table-shopping-cart">
                         <thead class="text-muted">
                             <tr class="small text-uppercase">
-                                <th scope="col">Product</th>
+                                <th scope="col" class="pl-3">Product</th>
                                 <th scope="col" width="120">Quantity</th>
-                                <th scope="col" width="120">Price</th>
+                                <th scope="col" width="160">Price</th>
                                 <th scope="col" class="text-right" width="200"> </th>
                             </tr>
                         </thead>
@@ -30,7 +30,7 @@
                             {% for cart_item in cart_items %}
                             <tr>
                                 <td>
-                                    <figure class="itemside align-items-center">
+                                    <figure class="itemside align-items-center ml-2">
                                         <a href="{{cart_item.product.get_url}}">
                                             <div class="aside"><img src="{{cart_item.product.photos.url}}"
                                                     class="img-sm">
@@ -75,7 +75,7 @@
                                     </div> <!-- col.// -->
                                 </td>
                                 <td>
-                                    <div class="price-wrap ">
+                                    <div class="price-wrap pl-2">
                                         <var class="price">₹ {{cart_item.sub_total}}</var>
                                         <small class="text-muted ">₹ {{cart_item.product.price}} each
                                         </small>

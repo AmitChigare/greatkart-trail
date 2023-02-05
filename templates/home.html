@@ -9,8 +9,9 @@
     <section class="section-intro padding-y-sm">
         <div class="container">
 
-            <div class="intro-banner-wrap">
-                <img src='{% static "images/banners/cover.jpg" %}' class="img-fluid rounded banner-c">
+            <div class="intro-banner-wrap" style="display: flex; justify-content: center;">
+                <img style="height: 56vh;" src='{% static "images/banners/cover1.jpg" %}'
+                    class="img-fluid rounded banner-c">
             </div>
         </div>
     </section>
@@ -54,6 +55,9 @@
                     </div>
                 </div> <!-- col.// -->
                 {% endfor %}
+                <a href="{% url 'store' %}" class="btn btn-outline-primary"
+                    style="margin-left: 50%;transform: translate(-50%,0);">See
+                    all</a>
             </div> <!-- row.// -->
 
         </div><!-- container // -->
