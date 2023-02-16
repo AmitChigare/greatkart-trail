@@ -12,6 +12,8 @@ from orders.models import OrderProduct
 
 # Create your views here.
 def store(request, category_slug=None):
+    min_price = 0
+    max_price = 99999
     categories = None
     products = None
     random_price_discount = random.randint(1, 40)
@@ -27,6 +29,30 @@ def store(request, category_slug=None):
         products = Product.objects.all().filter(is_available=True).order_by("price")
         # categories1 = Category.objects.all()
         products_count = products.count()
+
+    urll = request.META.get("HTTP_REFERER")
+    if request.method == "POST":
+        min_price = int(request.POST["min_price"])
+        max_price = int(request.POST["max_price"])
+        print(urll)
+
+        if "category" in urll:
+            category_slug = urll.split("/")[-2]
+        print(f"category_slug: {category_slug} ")
+        if category_slug != None:
+            categories = get_object_or_404(Category, slug=category_slug)
+            # categories1 = Category.objects.all()
+            products = Product.objects.filter(
+                price__range=(min_price, max_price),
+                category=categories,
+                is_available=True,
+            ).order_by("price")
+            products_count = products.count()
+        else:
+            products = Product.objects.filter(
+                price__range=(min_price, max_price), is_available=True
+            )
+            products_count = products.count()
     paginator = Paginator(products, 8)
     page = request.GET.get("page")
     paged_products = paginator.get_page(page)
@@ -34,7 +60,9 @@ def store(request, category_slug=None):
     context = {
         "products": paged_products,
         "products_count": products_count,
-        "random_price_discount": random_price_discount
+        "random_price_discount": random_price_discount,
+        "min_price": min_price,
+        "max_price": max_price,
         # "categories": categories1,
     }
     return render(request, "store.html", context)

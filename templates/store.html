@@ -29,9 +29,8 @@
                                 <h6 class="title">Categories</h6>
                             </a>
                         </header>
-                        <div class="filter-content collapse" id="collapse_1">
+                        <div class="filter-content collapse show" id="collapse_1">
                             <div class="card-body">
-
                                 <ul class="list-menu">
                                     <li><a href="{% url 'store' %}">All Products </a></li>
                                     {% for category in links %}
@@ -81,37 +80,53 @@
                                 <h6 class="title">Price range </h6>
                             </a>
                         </header>
-                        <div class="filter-content collapse" id="collapse_3">
+                        <div class="filter-content collapse show" id="collapse_3">
                             <div class="card-body">
-
-                                <div class="form-row">
-                                    <div class="form-group col-md-6">
-                                        <label>Min</label>
-                                        <!-- <input class="form-control" placeholder="$0" type="number"> -->
-                                        <select class="mr-2 form-control">
-                                            <option value="0">₹0</option>
-                                            <option value="50">₹50</option>
-                                            <option value="100">₹100</option>
-                                            <option value="150">₹150</option>
-                                            <option value="200">₹200</option>
-                                            <option value="500">₹500</option>
-                                            <option value="1000">₹1000</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group text-right col-md-6">
-                                        <label>Max</label>
-                                        <select class="mr-2 form-control">
-                                            <option value="50">₹50</option>
-                                            <option value="100">₹100</option>
-                                            <option value="150">₹150</option>
-                                            <option value="200">₹200</option>
-                                            <option value="500">₹500</option>
-                                            <option value="1000">₹1000</option>
-                                            <option value="2000">₹2000+</option>
-                                        </select>
-                                    </div>
-                                </div> <!-- form-row.// -->
-                                <button class="btn btn-block btn-primary">Apply</button>
+                                <form action="{% url 'store' %}" method="POST">
+                                    {% csrf_token %}
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6 m-0">
+                                            <label>Min</label>
+                                            <!-- <input class="form-control" placeholder="$0" type="number"> -->
+                                            <select class="mr-2 form-control" name="min_price">
+                                                <option value="0" {% if min_price == 0 %}selected{% endif %}>₹0
+                                                </option>
+                                                <option value="50" {% if min_price == 50 %} selected {% endif %}>₹50
+                                                </option>
+                                                <option value="100" {% if min_price == 100 %}selected{% endif %}>₹100
+                                                </option>
+                                                <option value="150" {% if min_price == 150 %}selected{% endif %}>₹150
+                                                </option>
+                                                <option value="200" {% if min_price == 200 %}selected{% endif %}>₹200
+                                                </option>
+                                                <option value="500" {% if min_price == 500 %}selected{% endif %}>₹500
+                                                </option>
+                                                <option value="1000" {% if min_price == 1000 %}selected{% endif %}>₹1000
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group text-left col-md-6">
+                                            <label>Max</label>
+                                            <select class="mr-2 form-control" name="max_price">
+                                                <option value="50" {% if max_price == 50 %}selected{% endif %}>₹50
+                                                </option>
+                                                <option value="100" {% if max_price == 100 %}selected{% endif %}>₹100
+                                                </option>
+                                                <option value="150" {% if max_price == 150 %}selected{% endif %}>₹150
+                                                </option>
+                                                <option value="200" {% if max_price == 200 %}selected{% endif %}>₹200
+                                                </option>
+                                                <option value="500" {% if max_price == 500 %}selected{% endif %}>₹500
+                                                </option>
+                                                <option value="1000" {% if max_price == 1000 %}selected{% endif %}>₹1000
+                                                </option>
+                                                <option value="99999" {% if max_price == 99999 %}selected{% endif %}>
+                                                    ₹2000+</option>
+                                            </select>
+                                        </div>
+                                    </div> <!-- form-row.// -->
+                                    <button class="btn btn-block btn-primary">Apply</button>
+                                </form>
                             </div><!-- card-body.// -->
                         </div>
                     </article> <!-- filter-group .// -->

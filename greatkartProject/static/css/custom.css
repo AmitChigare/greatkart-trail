@@ -277,6 +277,11 @@ a.title {
         padding: 3rem;
     }
 
+    .order-c-c {
+        padding: 10px !important;
+        width: 92% !important;
+    }
+
     .footer-form-c {
         width: 80% !important;
     }
